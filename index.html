@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10100f">
+<title>WU YUXING — Film Portfolio</title>
+<style>
+:root {
+  --bg: #10100f;
+  --panel: #191917;
+  --text: #f1eee7;
+  --muted: #aaa69c;
+  --gold: #c5a36a;
+  --line: rgba(255,255,255,.13);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+.container { width: min(1180px, 88%); margin: auto; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(16,16,15,.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.logo {
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-links { display: flex; gap: 25px; }
+.nav-links a, .lang-btn {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: color .2s;
+}
+.nav-links a:hover, .lang-btn:hover { color: var(--gold); }
+.lang-btn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 7px 12px;
+  cursor: pointer;
+}
+.hero {
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  right: -100px;
+  top: 40px;
+  background: radial-gradient(circle, rgba(197,163,106,.12), transparent 68%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; padding: 100px 0; }
+.eyebrow {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-size: clamp(52px, 9vw, 112px);
+  line-height: .98;
+  letter-spacing: -4px;
+  margin: 28px 0;
+  font-weight: 500;
+}
+.hero h1 span { color: var(--gold); }
+.hero-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+.hero-desc {
+  max-width: 500px;
+  color: #c4c0b7;
+  font-size: 14px;
+  margin-top: 28px;
+}
+.hero-link {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 12px 22px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 2px;
+  transition: .25s;
+}
+.hero-link:hover { background: var(--gold); color: #111; }
+section { padding: 100px 0; }
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 38px;
+}
+.section-kicker {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.section-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 400;
+  margin: 8px 0 0;
+  letter-spacing: 1px;
+}
+.section-note { color: var(--muted); font-size: 12px; }
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 38px 24px;
+}
+.project-card { cursor: pointer; min-width: 0; }
+.project-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(197,163,106,.25), transparent 38%),
+    linear-gradient(135deg, #292722, #111110 65%);
+  border: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .35s;
+}
+.project-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.06), transparent 70%);
+  transform: translateX(-100%);
+  transition: .7s;
+}
+.project-card:hover .project-cover::before { transform: translateX(100%); }
+.project-card:hover .project-cover { border-color: rgba(197,163,106,.6); }
+.cover-mark {
+  color: rgba(197,163,106,.8);
+  font-size: clamp(24px, 4vw, 46px);
+  letter-spacing: 5px;
+  font-weight: 300;
+  text-align: center;
+  padding: 15px;
+}
+.cover-index {
+  position: absolute;
+  left: 18px;
+  top: 15px;
+  color: rgba(255,255,255,.5);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.cover-play {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 12px;
+}
+.project-info { padding-top: 15px; }
+.project-meta {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.project-name { font-size: 19px; font-weight: 400; margin: 6px 0; }
+.project-role { color: var(--muted); font-size: 12px; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 9px 17px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: .2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.about-section {
+  background: #151513;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 80px;
+}
+.about-name {
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 15px 0;
+}
+.about-copy { color: #c2beb5; font-size: 14px; max-width: 650px; }
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 25px;
+}
+.skill-list span {
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 7px 12px;
+  font-size: 11px;
+}
+.contact-section { text-align: center; }
+.contact-title {
+  font-size: clamp(35px, 6vw, 65px);
+  font-weight: 400;
+  margin: 15px 0;
+}
+.contact-copy { color: var(--muted); font-size: 13px; }
+.contact-email {
+  display: inline-block;
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold);
+  margin-top: 22px;
+  padding-bottom: 5px;
+}
+footer {
+  border-top: 1px solid var(--line);
+  padding: 25px 0;
+  color: #77736b;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.footer-inner { display: flex; justify-content: space-between; gap: 15px; }
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0,0,0,.88);
+  overflow-y: auto;
+  padding: 35px 16px;
+}
+.modal.open { display: block; }
+.modal-panel {
+  width: min(900px, 100%);
+  margin: 30px auto;
+  background: #171715;
+  border: 1px solid var(--line);
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 2;
+  border: 1px solid rgba(255,255,255,.3);
+  background: rgba(0,0,0,.65);
+  color: white;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.modal-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #050505;
+}
+.modal-video iframe { width: 100%; height: 100%; border: 0; }
+.modal-no-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  background: #0b0b0a;
+  color: var(--muted);
+  font-size: 13px;
+}
+.modal-content { padding: 30px 35px 38px; }
+.modal-category { color: var(--gold); font-size: 10px; letter-spacing: 3px; }
+.modal-title { font-size: 30px; font-weight: 400; margin: 8px 0; }
+.modal-role { color: var(--muted); font-size: 12px; }
+.modal-desc { color: #c4c0b7; font-size: 14px; margin-top: 20px; }
+.empty-note { color: var(--muted); font-size: 13px; padding: 30px 0; }
+.mobile-menu { display: none; }
+@media (max-width: 700px) {
+  .container { width: 90%; }
+  .nav { min-height: 65px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 10px; }
+  .nav-right { gap: 12px; }
+  .logo { font-size: 14px; letter-spacing: 2px; }
+  .lang-btn { padding: 6px 8px; font-size: 10px; }
+  .hero { min-height: 570px; }
+  .hero h1 { letter-spacing: -2px; }
+  section { padding: 70px 0; }
+  .section-head { align-items: start; flex-direction: column; }
+  .project-grid { grid-template-columns: 1fr; gap: 28px; }
+  .about-grid { grid-template-columns: 1fr; gap: 25px; }
+  .footer-inner { flex-direction: column; }
+  .modal-content { padding: 24px 20px 30px; }
+  .modal-title { font-size: 24px; }
+}
+@media (max-width: 420px) {
+  .nav-links { gap: 8px; }
+  .nav-links a { font-size: 9px; letter-spacing: 0; }
+  .logo { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home">WU YUXING<span style="color:var(--gold)">.</span></a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#featured" data-zh="精选作品" data-en="SELECTED">精选作品</a>
+        <a href="#works" data-zh="全部作品" data-en="WORKS">全部作品</a>
+        <a href="#about" data-zh="关于我" data-en="ABOUT">关于我</a>
+        <a href="#contact" data-zh="联系" data-en="CONTACT">联系</a>
+      </nav>
+      <button class="lang-btn" id="langToggle">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="eyebrow" data-zh="个人影视作品集 · 2026" data-en="PERSONAL FILM PORTFOLIO · 2026">个人影视作品集 · 2026</div>
+      <h1>WU<br><span>YUXING</span></h1>
+      <div class="hero-subtitle" data-zh="摄影师 / 导演助理" data-en="CINEMATOGRAPHER / ASSISTANT DIRECTOR">摄影师 / 导演助理</div>
+      <p class="hero-desc" data-zh="专注于影像表达与现场创作。以摄影为核心，参与广告、品牌活动及纪录片项目，关注画面构成、现场协作与影像叙事。" data-en="Focused on visual storytelling and on-set creation. Working across commercial films, brand events and documentaries, with an emphasis on composition, collaboration and visual narrative.">专注于影像表达与现场创作。以摄影为核心，参与广告、品牌活动及纪录片项目，关注画面构成、现场协作与影像叙事。</p>
+      <a class="hero-link" href="#featured" data-zh="浏览作品　↓" data-en="EXPLORE WORK　↓">浏览作品　↓</a>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 / SELECTED WORK</div>
+          <h2 class="section-title" data-zh="精选作品" data-en="Selected Works">精选作品</h2>
+        </div>
+        <div class="section-note" data-zh="部分代表项目" data-en="A selection of projects">部分代表项目</div>
+      </div>
+      <div class="project-grid" id="featuredGrid"></div>
+    </div>
+  </section>
+
+  <section id="works" style="border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">02 / ALL PROJECTS</div>
+          <h2 class="section-title" data-zh="全部作品" data-en="All Works">全部作品</h2>
+        </div>
+        <div class="section-note" data-zh="按项目类型浏览" data-en="Browse by category">按项目类型浏览</div>
+      </div>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all" data-zh="全部作品" data-en="All Works">全部作品</button>
+        <button class="filter-btn" data-filter="commercial" data-zh="商业广告" data-en="Commercial">商业广告</button>
+        <button class="filter-btn" data-filter="brand" data-zh="品牌活动" data-en="Brand Events">品牌活动</button>
+      </div>
+      <div class="project-grid" id="allGrid"></div>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="container about-grid">
+      <div>
+        <div class="section-kicker">03 / ABOUT ME</div>
+        <h2 class="about-name">WU<br>YUXING</h2>
+        <div class="project-role" data-zh="摄影师 / 导演助理" data-en="Cinematographer / Assistant Director">摄影师 / 导演助理</div>
+      </div>
+      <div>
+        <p class="about-copy" data-zh="吴雨星，摄影专业应届毕业生，主要从事摄影与导演助理相关工作。具备影视拍摄现场执行经验，能够根据导演的创作意图落实机位、景别与构图，并具备现场协调、团队沟通及客户沟通能力。参与过商业广告、品牌活动、宣传片及纪录片等不同类型项目。" data-en="WU YUXING is a cinematography graduate focused on camera operation and assistant directing. Experienced in on-set execution, translating a director's intentions into camera positions, shot sizes and compositions, with strengths in coordination, team communication and client communication. Project experience includes commercials, brand events, promotional films and documentaries.">吴雨星，摄影专业应届毕业生，主要从事摄影与导演助理相关工作。具备影视拍摄现场执行经验，能够根据导演的创作意图落实机位、景别与构图，并具备现场协调、团队沟通及客户沟通能力。参与过商业广告、品牌活动、宣传片及纪录片等不同类型项目。</p>
+        <div class="skill-list">
+          <span data-zh="摄影 / 摄像" data-en="Cinematography">摄影 / 摄像</span>
+          <span data-zh="导演助理" data-en="Assistant Directing">导演助理</span>
+          <span data-zh="现场执行" data-en="On-set Coordination">现场执行</span>
+          <span data-zh="客户沟通" data-en="Client Communication">客户沟通</span>
+          <span data-zh="后期制作" data-en="Post-production">后期制作</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-kicker">04 / CONTACT</div>
+      <h2 class="contact-title" data-zh="期待与你合作。" data-en="LET'S WORK TOGETHER.">期待与你合作。</h2>
+      <p class="contact-copy" data-zh="如有项目合作或工作机会，欢迎与我联系。" data-en="For project collaborations and professional opportunities, feel free to get in touch.">如有项目合作或工作机会，欢迎与我联系。</p>
+      <a class="contact-email" href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 WU YUXING. ALL RIGHTS RESERVED.</span>
+    <span>PERSONAL FILM PORTFOLIO</span>
+  </div>
+</footer>
+
+<div class="modal" id="projectModal">
+  <div class="modal-panel">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div id="modalMedia"></div>
+    <div class="modal-content">
+      <div class="modal-category" id="modalCategory"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-role" id="modalRole"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+const projects = [
+  {
+    title: "帝人商事宣传片花絮",
+    en: "Teijin Trading Behind the Scenes",
+    category: "commercial",
+    role: "摄影师 + 后期制作",
+    roleEn: "Camera Operator + Post-production",
+    desc: "帝人商事宣传片拍摄花絮，记录项目拍摄现场及制作过程。",
+    descEn: "Behind-the-scenes footage documenting the production process and filming on set for a Teijin Trading promotional film.",
+    video: "https://player.vimeo.com/video/1242756751?h=77af37d1dc",
+    featured: true,
+    mark: "TEIJIN"
+  },
+  {
+    title: "一顶盔头",
+    en: "A Peking Opera Headdress",
+    category: "special",
+    role: "导演 / 摄影",
+    roleEn: "Director / Cinematographer",
+    desc: "毕业纪录片作品，以京剧盔头制作技艺为切入点，记录手工艺人的创作过程，探索传统工艺与戏曲舞台视觉表达之间的联系。",
+    descEn: "A graduation documentary exploring the craft of Peking Opera headdresses through the artisan's creative process and the relationship between traditional craftsmanship and theatrical visual expression.",
+    video: "",
+    featured: true,
+    mark: "一顶盔头"
+  },
+  {
+    title: "MUJI 无印良品新系统先导片",
+    en: "MUJI New System Teaser Film",
+    category: "commercial",
+    role: "导演助理",
+    roleEn: "Assistant Director",
+    desc: "参与 MUJI 无印良品新系统先导片拍摄，协助导演完成现场拍摄执行与协调工作。",
+    descEn: "Assistant director on the MUJI new system teaser film, supporting on-set execution and coordination.",
+    video: "",
+    featured: true,
+    mark: "MUJI"
+  },
+  {
+    title: "华东师范大学教育学部十周年 MV《致未来教育引领者》",
+    en: "ECNU Faculty of Education 10th Anniversary MV",
+    category: "brand",
+    role: "现场执行导演助理",
+    roleEn: "On-set Executive Assistant Director",
+    desc: "参与华东师范大学教育学部十周年 MV 拍摄，担任现场执行导演助理，协助拍摄流程与现场调度。",
+    descEn: "On-set executive assistant director for the 10th anniversary music video of the Faculty of Education at East China Normal University.",
+    video: "",
+    featured: true,
+    mark: "ECNU"
+  },
+  {
+    title: "天猫红品季《祝你一路长hooong》",
+    en: "Tmall Red Season — Wishing You a Prosperous Journey",
+    category: "commercial",
+    role: "摄影助理",
+    roleEn: "Camera Assistant",
+    desc: "参与天猫红品季商业广告拍摄，担任摄影助理，协助摄影组完成现场拍摄工作。",
+    descEn: "Camera assistant on a Tmall Red Season commercial production, supporting the camera department on set.",
+    video: "",
+    featured: true,
+    mark: "TMALL"
+  },
+  {
+    title: "琳听《高定局》",
+    en: "LIN TING — Haute Couture",
+    category: "commercial",
+    role: "摄影师",
+    roleEn: "Camera Operator",
+    desc: "担任《高定局》项目摄影师，负责现场画面拍摄与镜头执行。",
+    descEn: "Camera operator for LIN TING's Haute Couture project, responsible for on-set cinematography.",
+    video: "",
+    featured: true,
+    mark: "LIN TING"
+  },
+  {
+    title: "天猫人头马《邑马当先》",
+    en: "Tmall Remy Martin — Yi Ma Dang Xian",
+    category: "commercial",
+    role: "摄影助理",
+    roleEn: "Camera Assistant",
+    desc: "参与天猫人头马《邑马当先》商业广告拍摄，担任摄影助理。",
+    descEn: "Camera assistant on the Tmall Remy Martin commercial production.",
+    video: "",
+    featured: false,
+    mark: "REMY MARTIN"
+  },
+  {
+    title: "《少女前线》游戏宣传片",
+    en: "Girls' Frontline Game Promotional Film",
+    category: "commercial",
+    role: "摄影助理",
+    roleEn: "Camera Assistant",
+    desc: "参与《少女前线》游戏宣传片拍摄，协助摄影组完成现场工作。",
+    descEn: "Camera assistant on the Girls' Frontline game promotional film.",
+    video: "",
+    featured: false,
+    mark: "GIRLS' FRONTLINE"
+  },
+  {
+    title: "上海华旭双语学校70周年宣传片",
+    en: "Shanghai Washington Bilingual School 70th Anniversary Film",
+    category: "commercial",
+    role: "导演助理",
+    roleEn: "Assistant Director",
+    desc: "参与上海华旭双语学校70周年宣传片拍摄，担任导演助理。",
+    descEn: "Assistant director on the 70th anniversary promotional film for Shanghai Washington Bilingual School.",
+    video: "",
+    featured: false,
+    mark: "70 YEARS"
+  },
+  {
+    title: "MUJI 2026 良品集会",
+    en: "MUJI 2026 Community Gathering",
+    category: "brand",
+    role: "直播游击机位摄像 / 制片",
+    roleEn: "Live Camera Operator / Producer",
+    desc: "参与 MUJI 2026 良品集会直播工作，负责游击机位拍摄及制片相关工作。",
+    descEn: "Live camera operator on a roaming camera position and producer for the MUJI 2026 community gathering.",
+    video: "",
+    featured: false,
+    mark: "MUJI EVENT"
+  },
+  {
+    title: "帝人集团30周年庆典",
+    en: "Teijin Group 30th Anniversary Celebration",
+    category: "brand",
+    role: "现场直播特写机位 / 幕后宣传片后期制作",
+    roleEn: "Live Close-up Camera / BTS Film Post-production",
+    desc: "参与帝人集团30周年庆典现场直播，负责特写机位拍摄，并参与幕后宣传片后期制作。",
+    descEn: "Live close-up camera operator for the Teijin Group 30th anniversary celebration, with additional post-production work on the behind-the-scenes promotional film.",
+    video: "",
+    featured: false,
+    mark: "TEIJIN 30"
+  },
+  {
+    title: "融力天闻律所《闲话律师业》",
+    en: "Rongli Tianwen Law Firm — Lawyers' Talk",
+    category: "brand",
+    role: "嘉宾特写机位",
+    roleEn: "Guest Close-up Camera Operator",
+    desc: "参与《闲话律师业》项目现场拍摄，负责嘉宾特写机位。",
+    descEn: "Guest close-up camera operator for the Lawyers' Talk project.",
+    video: "",
+    featured: false,
+    mark: "LAWYERS' TALK"
+  },
+  {
+    title: "行知丝路研究院·上海站",
+    en: "Xingzhi Silk Road Institute — Shanghai",
+    category: "brand",
+    role: "跟拍摄像 / 后期剪辑",
+    roleEn: "Camera Operator / Video Editor",
+    desc: "跟拍企业负责人走访多家企业，并负责幕后视频剪辑。",
+    descEn: "Followed a business leader during visits to multiple companies and edited the behind-the-scenes video.",
+    video: "",
+    featured: false,
+    mark: "XINGZHI"
+  },
+  {
+    title: "同济大学·中国城市规划学（2025）",
+    en: "Tongji University — Urban Planning Conference 2025",
+    category: "brand",
+    role: "会议活动摄像 / 后期制作",
+    roleEn: "Event Camera Operator / Post-production",
+    desc: "参与中国城市规划学相关会议活动拍摄，并负责后期制作。",
+    descEn: "Camera operator and post-production contributor for a China urban planning conference at Tongji University.",
+    video: "",
+    featured: false,
+    mark: "TONGJI"
+  },
+  {
+    title: "2026 NECC 琳听 LT 当代家居趋势展",
+    en: "2026 NECC LIN TING LT Contemporary Home Trend Fair",
+    category: "brand",
+    role: "现场摄影师",
+    roleEn: "On-site Camera Operator",
+    desc: "参与琳听 LT 当代家居趋势展现场拍摄，负责活动影像记录。",
+    descEn: "On-site camera operator documenting the LIN TING LT contemporary home trend fair.",
+    video: "",
+    featured: false,
+    mark: "NECC"
+  },
+  {
+    title: "Daiwa Masters 杭州站 / 上海站",
+    en: "Daiwa Masters — Hangzhou & Shanghai",
+    category: "brand",
+    role: "摄影师",
+    roleEn: "Camera Operator",
+    desc: "参与 Daiwa Masters 杭州站及上海站活动拍摄，负责现场影像记录。",
+    descEn: "Camera operator documenting the Daiwa Masters events in Hangzhou and Shanghai.",
+    video: "",
+    featured: false,
+    mark: "DAIWA"
+  },
+  {
+    title: "2026 华东理工大学人文社科培训活动",
+    en: "ECUST Humanities and Social Sciences Training Event",
+    category: "brand",
+    role: "摄影师",
+    roleEn: "Camera Operator",
+    desc: "参与华东理工大学人文社科培训活动现场拍摄。",
+    descEn: "Camera operator for the humanities and social sciences training event at East China University of Science and Technology.",
+    video: "",
+    featured: false,
+    mark: "ECUST"
+  },
+  {
+    title: "2025 全国大学生广告艺术大赛",
+    en: "2025 National College Student Advertising Art Competition",
+    category: "commercial",
+    role: "导演 / 全国二等奖",
+    roleEn: "Director / National Second Prize",
+    desc: "担任作品导演，作品获得2025年全国大学生广告艺术大赛全国二等奖。",
+    descEn: "Director of the award-winning entry, which received the national second prize in the 2025 National College Student Advertising Art Competition.",
+    video: "",
+    featured: false,
+    mark: "AD AWARD"
+  },
+  {
+    title: "2026 城市公共日",
+    en: "2026 City Public Day",
+    category: "brand",
+    role: "摄影师",
+    roleEn: "Camera Operator",
+    desc: "参与2026城市公共日活动现场拍摄，负责影像记录。",
+    descEn: "Camera operator documenting the 2026 City Public Day event.",
+    video: "",
+    featured: false,
+    mark: "CITY PUBLIC DAY"
+  }
+];
+
+let currentLang = "zh";
+let currentFilter = "all";
+
+function categoryName(category) {
+  if (category === "commercial") return currentLang === "zh" ? "商业广告" : "Commercial";
+  if (category === "brand") return currentLang === "zh" ? "品牌活动" : "Brand Events";
+  return currentLang === "zh" ? "个人纪录片" : "Personal Documentary";
+}
+
+function projectTitle(project) {
+  return currentLang === "zh" ? project.title : project.en;
+}
+function projectRole(project) {
+  return currentLang === "zh" ? project.role : project.roleEn;
+}
+function projectDesc(project) {
+  return currentLang === "zh" ? project.desc : project.descEn;
+}
+
+function createCard(project, index) {
+  const card = document.createElement("article");
+  card.className = "project-card";
+  card.innerHTML = `
+    <div class="project-cover">
+      <span class="cover-index">${String(index + 1).padStart(2, "0")} / PROJECT</span>
+      <div class="cover-mark">${project.mark}</div>
+      <span class="cover-play">↗</span>
+    </div>
+    <div class="project-info">
+      <div class="project-meta">${categoryName(project.category)}</div>
+      <h3 class="project-name"></h3>
+      <div class="project-role"></div>
+    </div>`;
+  card.querySelector(".project-name").textContent = projectTitle(project);
+  card.querySelector(".project-role").textContent = projectRole(project);
+  card.addEventListener("click", () => openProject(project));
+  return card;
+}
+
+function renderProjects() {
+  const featuredGrid = document.getElementById("featuredGrid");
+  const allGrid = document.getElementById("allGrid");
+  featuredGrid.innerHTML = "";
+  allGrid.innerHTML = "";
+
+  projects.filter(p => p.featured).forEach((p, i) => {
+    featuredGrid.appendChild(createCard(p, i));
+  });
+
+  const visibleProjects = projects.filter(p => {
+    if (currentFilter === "all") return true;
+    return p.category === currentFilter;
+  });
+
+  visibleProjects.forEach((p, i) => {
+    allGrid.appendChild(createCard(p, i));
+  });
+}
+
+function openProject(project) {
+  const modal = document.getElementById("projectModal");
+  const media = document.getElementById("modalMedia");
+  media.innerHTML = "";
+
+  if (project.video) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "modal-video";
+    const iframe = document.createElement("iframe");
+    iframe.src = project.video;
+    iframe.title = projectTitle(project);
+    iframe.allow = "autoplay; fullscreen; picture-in-picture";
+    iframe.allowFullscreen = true;
+    wrapper.appendChild(iframe);
+    media.appendChild(wrapper);
+  } else {
+    const placeholder = document.createElement("div");
+    placeholder.className = "modal-no-video";
+    placeholder.textContent = currentLang === "zh" ? "项目视频暂未添加" : "Project video coming soon";
+    media.appendChild(placeholder);
+  }
+
+  document.getElementById("modalCategory").textContent = categoryName(project.category);
+  document.getElementById("modalTitle").textContent = projectTitle(project);
+  document.getElementById("modalRole").textContent = projectRole(project);
+  document.getElementById("modalDesc").textContent = projectDesc(project);
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeProject() {
+  document.getElementById("projectModal").classList.remove("open");
+  document.getElementById("modalMedia").innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+document.getElementById("modalClose").addEventListener("click", closeProject);
+document.getElementById("projectModal").addEventListener("click", event => {
+  if (event.target.id === "projectModal") closeProject();
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeProject();
+});
+
+document.querySelectorAll(".filter-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+    currentFilter = button.dataset.filter;
+    renderProjects();
+  });
+});
+
+function updateLanguage() {
+  document.documentElement.lang = currentLang === "zh" ? "zh-CN" : "en";
+  document.querySelectorAll("[data-zh]").forEach(element => {
+    element.textContent = currentLang === "zh" ? element.dataset.zh : element.dataset.en;
+  });
+  document.getElementById("langToggle").textContent = currentLang === "zh" ? "EN" : "中文";
+  renderProjects();
+}
+
+document.getElementById("langToggle").addEventListener("click", () => {
+  currentLang = currentLang === "zh" ? "en" : "zh";
+  updateLanguage();
+});
+
+renderProjects();
+</script>
+</body>
+</html>
