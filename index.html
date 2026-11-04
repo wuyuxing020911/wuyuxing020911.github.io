@@ -181,6 +181,19 @@ section { padding: 100px 0; }
 }
 .project-card:hover .project-cover::before { transform: translateX(100%); }
 .project-card:hover .project-cover { border-color: rgba(197,163,106,.6); }
+  .project-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.project-cover .cover-index,
+.project-cover .cover-play {
+  z-index: 2;
+}
 .cover-mark {
   color: rgba(197,163,106,.8);
   font-size: clamp(24px, 4vw, 46px);
