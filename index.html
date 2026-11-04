@@ -158,6 +158,19 @@ section { padding: 100px 0; }
   justify-content: center;
   transition: .35s;
 }
+  .project-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.project-cover .cover-index,
+.project-cover .cover-play {
+  z-index: 2;
+}
 .project-cover::before {
   content: "";
   position: absolute;
@@ -469,7 +482,8 @@ const projects = [
     descEn: "Behind-the-scenes footage documenting the production process and filming on set for a Teijin Trading promotional film.",
     video: "https://player.bilibili.com/player.html?bvid=BV1bzx96iESW&page=1&high_quality=1&danmaku=0",
     featured: true,
-    mark: "TEIJIN"
+    mark: "TEIJIN",
+    cover: "teijin-cover.jpg.jpg"
   },
   {
     title: "一顶盔头",
