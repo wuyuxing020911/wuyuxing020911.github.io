@@ -542,9 +542,10 @@ const projects = [
     roleEn: "Camera Assistant",
     desc: "参与天猫红品季商业广告拍摄，担任摄影助理，协助摄影组完成现场拍摄工作。",
     descEn: "Camera assistant on a Tmall Red Season commercial production, supporting the camera department on set.",
-    video: "",
-    featured: true,
-    mark: "TMALL"
+   video: "",
+   externalLink: "https://weixin.qq.com/sph/AucNzVFBOP",
+   featured: true,
+   mark: "TMALL"
   },
   {
     title: "琳听《高定局》",
@@ -794,6 +795,35 @@ function openProject(project) {
     iframe.allowFullscreen = true;
     wrapper.appendChild(iframe);
     media.appendChild(wrapper);
+  } else if (project.externalLink) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "modal-no-video";
+    wrapper.style.display = "flex";
+    wrapper.style.flexDirection = "column";
+    wrapper.style.gap = "18px";
+
+    const text = document.createElement("div");
+    text.textContent = currentLang === "zh"
+      ? "该项目视频发布于微信视频号"
+      : "This project is available on WeChat Channels";
+
+    const link = document.createElement("a");
+    link.href = project.externalLink;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = currentLang === "zh"
+      ? "前往微信视频号观看 ↗"
+      : "Watch on WeChat Channels ↗";
+
+    link.style.color = "#c5a36a";
+    link.style.border = "1px solid #c5a36a";
+    link.style.padding = "10px 22px";
+    link.style.textDecoration = "none";
+
+    wrapper.appendChild(text);
+    wrapper.appendChild(link);
+    media.appendChild(wrapper);
+
   } else {
     const placeholder = document.createElement("div");
     placeholder.className = "modal-no-video";
