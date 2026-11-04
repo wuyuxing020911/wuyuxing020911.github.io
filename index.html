@@ -725,10 +725,12 @@ function projectDesc(project) {
 function createCard(project, index) {
   const card = document.createElement("article");
   card.className = "project-card";
+
   card.innerHTML = `
     <div class="project-cover">
+      ${project.cover ? `<img src="${project.cover}" alt="${project.title}">` : ""}
       <span class="cover-index">${String(index + 1).padStart(2, "0")} / PROJECT</span>
-      <div class="cover-mark">${project.mark}</div>
+      ${project.cover ? "" : `<div class="cover-mark">${project.mark}</div>`}
       <span class="cover-play">↗</span>
     </div>
     <div class="project-info">
@@ -736,9 +738,11 @@ function createCard(project, index) {
       <h3 class="project-name"></h3>
       <div class="project-role"></div>
     </div>`;
+
   card.querySelector(".project-name").textContent = projectTitle(project);
   card.querySelector(".project-role").textContent = projectRole(project);
   card.addEventListener("click", () => openProject(project));
+
   return card;
 }
 
