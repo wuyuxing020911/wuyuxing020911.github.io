@@ -757,7 +757,7 @@ function openProject(project) {
     const wrapper = document.createElement("div");
     wrapper.className = "modal-video";
     const iframe = document.createElement("iframe");
-    iframe.src = project.video;
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);  if (project.video.includes("BV1bzx96iESW") && isMobile) {   iframe.src = "https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=BV1bzx96iESW&page=1&danmaku=0&high_quality=1"; } else {   iframe.src = project.video; }
     iframe.title = projectTitle(project);
     iframe.allow = "autoplay; fullscreen; picture-in-picture";
     iframe.allowFullscreen = true;
