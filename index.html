@@ -518,7 +518,7 @@ const projects = [
     roleEn: "Assistant Director",
     desc: "参与 MUJI 无印良品新系统先导片拍摄，协助导演完成现场拍摄执行与协调工作。",
     descEn: "Assistant director on the MUJI new system teaser film, supporting on-set execution and coordination.",
-    video: "",
+    video: "https://player.bilibili.com/player.html?bvid=BV14Nxd6qEkE&page=1&high_quality=1&danmaku=0",
     featured: true,
     mark: "MUJI"
   },
@@ -789,7 +789,14 @@ function openProject(project) {
     const wrapper = document.createElement("div");
     wrapper.className = "modal-video";
     const iframe = document.createElement("iframe");
-    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);  if (project.video.includes("BV1bzx96iESW") && isMobile) {   iframe.src = "https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=BV1bzx96iESW&page=1&danmaku=0&high_quality=1"; } else {   iframe.src = project.video; }
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    const videoBvid = new URL(project.video).searchParams.get("bvid");
+    iframe.src = `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${videoBvid}&page=1&danmaku=0&high_quality=1`;
+  } else {
+    iframe.src = project.video;
+  }
     iframe.title = projectTitle(project);
     iframe.allow = "autoplay; fullscreen; picture-in-picture";
     iframe.allowFullscreen = true;
